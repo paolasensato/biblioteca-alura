@@ -4,7 +4,7 @@ Esse projeto foi implementado ao decorrer do curso de Node.Js: API Rest com Expr
 
 ## Variáveis de ambiente
 
-Configure as variáveis de ambiente necessárias criando o arquivo **.env** com as informações copiadas do **.env.example**.
+Configure as variáveis de ambiente necessárias criando o arquivo **.env** com as informações copiadas de **.env.example**.
 
 ## Instalação e Execução
 
