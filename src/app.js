@@ -23,6 +23,14 @@ app.get('/livros', (req, res) => {
     res.status(200).json(books)
 })
 
+app.get('/livros/:idLivro', (req, res) => {
+    const { params } = req;
+    const { idLivro } = params;
+
+    let index = buscaLivro(idLivro);
+    res.json(books[index]);
+})
+
 app.post('/livros', (req, res) => {
     books.push(req.body);
     res.status(201).send('Registrado com sucesso!');
@@ -32,10 +40,10 @@ app.put('/livros/:idLivro', (req, res) => {
     const { params, body } = req;
     const { title } = body;
     const { idLivro } = params;
-    
+
     let index = buscaLivro(idLivro);
     books[index].title = title;
-    res.json(books);
+    res.json(books[index]);
 })
 
 function buscaLivro(id) {
