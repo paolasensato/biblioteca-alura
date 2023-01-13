@@ -15,6 +15,7 @@ $ npm install
 
 ## Banco de dados
 
+Foi utilizado o serviço gratuito em nuvem do MongoDb Atlas
 
 ## Servidor
 
