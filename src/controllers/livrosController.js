@@ -3,24 +3,28 @@ import Livro from "../models/Livro.js";
 class LivroController {
 
     static getLivros = (req, res) => {
-        Livro.find((err, Livro) => {
-            res.status(200).json(Livro);
-        })  
+        Livro.find()
+            .populate('author')
+            .exec((err, Livro) => {
+                res.status(200).json(Livro);
+            })
     }
 
     static findLivroById = (req, res) => {
         const { params } = req;
         const { id } = params
 
-        Livro.findById(id, (err, livros) => {
-            if(err) {
-                res.status(400).send({
-                    message: `${err.message} - Id não identificado`
-                });
-            } else {
-                res.status(200).send(livros);
-            }
-        }) 
+        Livro.findById(id)
+            .populate('author', 'name')
+            .exec((err, livros) => {
+                if(err) {
+                    res.status(400).send({
+                        message: `${err.message} - Id não identificado`
+                    });
+                } else {
+                    res.status(200).send(livros);
+                }
+            })
     }
 
     static postLivro = (req, res) => {
@@ -65,6 +69,22 @@ class LivroController {
                 })
             }
         })
+    }
+
+    static findLivroByPublishingCompany = (req, res) => {
+        const { query } = req;
+        const { publishingCompany } = query;
+        
+        Livro.find({'publishingCompany': publishingCompany}, {}, (err, livros) => {
+            if(err) {
+                res.status(400).send({
+                    message: `${err.message} - editora não identificada`
+                });
+            } else {
+                res.status(200).send(livros);
+            }
+        })
+
     }
 
 }
